@@ -5,7 +5,7 @@ import path from "path"
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/hashbone_test/",
+  base: "/hashbon_test/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
