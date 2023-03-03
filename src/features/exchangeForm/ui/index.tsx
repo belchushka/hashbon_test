@@ -21,25 +21,17 @@ export const ExchangeForm = () => {
     });
     for(const k of Object.keys(errors)){
       const key = k as keyof typeof errors
-      const hasError = errors[key] || false
-      if (hasError){
-        formValid = false
-        dispatch({
-          type: "SET",
-          payload:{
-            name: key,
-            error: true
-          }
-        })
-        continue
-      }
+      const hasError = errors[key]
       dispatch({
         type: "SET",
         payload:{
           name: key,
-          error: false
+          error: hasError
         }
       })
+      if (hasError){
+        formValid = false
+      }
     }
     if (formValid){
       const {error, data: convertionData} = db.getConvertation({
@@ -50,6 +42,7 @@ export const ExchangeForm = () => {
       if (error){
         setError(error.message)
         setShowResult(false)
+        return
       }
       if (convertionData){
         setRate(convertionData.rate)

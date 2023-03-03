@@ -18,7 +18,10 @@ type GetConvertationReturn = {
 class DB {
   private data: Document | null = null;
   public async loadData(){
-    const data = await fetch("https://matbea.com/xml/bestchange.xml")
+    const data = await fetch("https://matbea.com/xml/bestchange.xml", {
+      method: "GET",
+      mode: "no-cors"
+    })
     const xml = await data.text()
     this.data = new DOMParser().parseFromString(xml, "text/xml")
   }
